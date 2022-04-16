@@ -8,6 +8,14 @@ class State
   def set_state(state)
     raise 'not implemented'
   end
+
+  def to_s
+    raise 'not implemented'
+  end
+
+  private
+
+  attr_writer :state
 end
 
 class MaxState < State
@@ -32,10 +40,14 @@ class MaxState < State
     self.state = state
   end
 
+  def to_s
+    self.state
+  end
+
   private
 
   def guard_valid_state!(state)
-    return unless States::ALL.include?(state)
+    return if States::ALL.include?(state)
 
     raise RuntimeError, 'invalid state'
   end

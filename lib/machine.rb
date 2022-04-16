@@ -1,3 +1,5 @@
+require 'singleton'
+
 class Machine
   include Singleton
 
@@ -10,6 +12,10 @@ class Machine
   def receive_event(event)
     raise 'not implemented'
   end
+
+  private
+
+  attr_writer :state
 end
 
 class MaxMachine < Machine
@@ -25,6 +31,8 @@ class MaxMachine < Machine
       state.set_state(MaxState::States::GYMMING)
     when MaxEvent::Events::FEEL_LIKE_READING
       state.set_state(MaxState::States::READING)
+    else
+      raise RuntimeError, "Invalid event received: #{event}"
     end
   end
 end
