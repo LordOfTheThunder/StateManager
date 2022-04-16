@@ -1,5 +1,8 @@
 require 'singleton'
 
+# Machine is a singleton used by StateManager.
+# It must implement a constructor and a receive_event method which will convert event to state
+
 class Machine
   include Singleton
 
@@ -9,7 +12,7 @@ class Machine
     raise 'not implemented. Please initialize the state'
   end
 
-  def receive_event(event)
+  def receive_event(event, metadata: nil)
     raise 'not implemented'
   end
 

@@ -1,3 +1,5 @@
+# Simple state interface with a public read method and a private write method
+
 class State
   attr_reader :state
 

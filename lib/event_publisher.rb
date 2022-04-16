@@ -1,3 +1,5 @@
+# Mixin in charge of event publishing core which requires its consumer to define the consumers of the published events
+
 module EventPublisher
   extend self
 
