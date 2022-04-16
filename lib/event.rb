@@ -1,5 +1,11 @@
 class Event
   attr_reader :metadata
+  attr_reader :name
+
+  def initialize(name:, metadata: nil)
+    @name = name
+    @metadata = metadata
+  end
 end
 
 class MaxEvent < Event

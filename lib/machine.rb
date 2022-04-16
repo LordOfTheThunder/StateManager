@@ -20,22 +20,27 @@ end
 
 class MaxMachine < Machine
   MAX_NUM_OF_SAME_SUCCESSIVE_EVENTS = 3
+  MAX_GYM = 'Target Ramat Gan'.freeze
 
   def initialize
     self.state = MaxState.new
     self.event_counter = {}
   end
 
-  def receive_event(event)
-    case event
+  def receive_event(event, metadata: nil)
+    case event.name
     when MaxEvent::Events::HUNGER_ATTACKED
       on_event_received(MaxEvent::Events::HUNGER_ATTACKED, MaxState::States::EATING)
     when MaxEvent::Events::ARRIVED_TO_GYM
-      on_event_received(MaxEvent::Events::ARRIVED_TO_GYM, MaxState::States::GYMMING)
+      if !event.metadata.nil? && event.metadata[:gym_name] == MAX_GYM
+        on_event_received(MaxEvent::Events::ARRIVED_TO_GYM, MaxState::States::GYMMING)
+      else
+        on_event_received(MaxEvent::Events::ARRIVED_TO_GYM, MaxState::States::THINKING_WHAT_TO_DO)
+      end
     when MaxEvent::Events::FEEL_LIKE_READING
       on_event_received(MaxEvent::Events::FEEL_LIKE_READING, MaxState::States::READING)
     else
-      raise RuntimeError, "Invalid event received: #{event}"
+      raise RuntimeError, "Invalid event received: #{event.name}"
     end
   end
 
