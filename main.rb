@@ -9,6 +9,10 @@ state_manager.publish_event(MaxEvent::Events::ARRIVED_TO_GYM)
 puts "Max just arrived to gym! What is he going to do there? I wonder..."
 puts "Seems like now max is: #{state_manager.machine.state}"
 
+puts "But what if max goes to gym 3 times in a row?"
+state_manager.publish_event(MaxEvent::Events::ARRIVED_TO_GYM)
+state_manager.publish_event(MaxEvent::Events::ARRIVED_TO_GYM)
+
 begin
   state_manager.publish_event('invalid_event')
 rescue => e
