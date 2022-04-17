@@ -7,8 +7,8 @@ module EventPublisher
     @observers = observers
   end
 
-  def publish_event(event)
-    observers.each { |observer| observer.receive_event(event) }
+  def publish_event!(event)
+    observers.each { |observer| observer.receive_event!(event) }
   end
 
   private

@@ -12,7 +12,7 @@ class Machine
     raise 'not implemented. Please initialize the state'
   end
 
-  def receive_event(event, metadata: nil)
+  def receive_event!(event, metadata: nil)
     raise 'not implemented'
   end
 
@@ -30,7 +30,7 @@ class MaxMachine < Machine
     self.event_counter = {}
   end
 
-  def receive_event(event, metadata: nil)
+  def receive_event!(event, metadata: nil)
     case event.name
     when MaxEvent::Events::HUNGER_ATTACKED
       on_event_received(MaxEvent::Events::HUNGER_ATTACKED, MaxState::States::EATING)
